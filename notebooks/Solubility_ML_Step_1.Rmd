@@ -1,7 +1,9 @@
 ---
 title: "Solubility Prediction Step 1"
 author: "Mahitab Sakr"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -17,7 +19,7 @@ library(kableExtra)
 
 Reading the data file;
 ```{r}
-data <- read.csv("curated-solubility-dataset-5.csv", 
+data <- read.csv("../data/curated-solubility-dataset-5.csv", 
                         sep = ",", header = TRUE)
 ```
 Seeing the data file:

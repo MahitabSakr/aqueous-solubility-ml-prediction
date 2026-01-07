@@ -1,7 +1,9 @@
 ---
 title: "Solubility Prediction Step 2"
 author: "Mahitab Sakr"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -17,7 +19,7 @@ library(kableExtra)
 
 Reading the data file;
 ```{r}
-df <- read.csv("df.csv", sep = ",", header = TRUE)
+df <- read.csv("../data/df.csv", sep = ",", header = TRUE)
 ```
 Making the correlation values:
 ```{r}

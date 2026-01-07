@@ -1,7 +1,9 @@
 ---
 title: "Solubility Prediction Step 4"
 author: "Mahitab Sakr"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -19,7 +21,7 @@ library(plotly)
 
 Reading the data file;
 ```{r}
-T1 <- read.csv("results_df_2.csv", sep = ",", header = TRUE)
+T1 <- read.csv("../data/results_df_2.csv", sep = ",", header = TRUE)
 ```
 Seeing the data file:
 ```{r}
