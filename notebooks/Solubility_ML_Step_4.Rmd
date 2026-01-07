@@ -1,0 +1,199 @@
+---
+title: "Solubility Prediction Step 4"
+author: "Mahitab Sakr"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Importing libraries: 
+
+```{r}
+library(tidyverse)
+library(kableExtra)
+library("ggpubr")
+library(plotly)
+```
+
+Reading the data file;
+```{r}
+T1 <- read.csv("results_df_2.csv", sep = ",", header = TRUE)
+```
+Seeing the data file:
+```{r}
+head(T1, 15)%>%
+  kbl(caption = "1000 runs results table") %>%
+  kable_paper() %>%
+  scroll_box(width = "100%", height = "500px")
+```
+Subsetting the ET model:
+```{r}
+T1_et <- subset(T1, Model == "et")
+```
+Seeing the ET model results:
+```{r}
+head(T1_et, 15)%>%
+  kbl(caption = "1000 runs for ET results table") %>%
+  kable_paper() %>%
+  scroll_box(width = "100%", height = "500px")
+```
+
+Visualizing the results for ET: 
+```{r}
+fig1 <- T1_et %>%
+  plot_ly(
+    y = ~Test.MSE,
+    type = 'violin',
+    box = list(
+      visible = T
+    ),
+    meanline = list(
+      visible = T
+    ),
+    color = I("#241468"),
+    x0 = 'Extra Trees Regreesion'
+  ) 
+
+fig1 <- fig1 %>%
+  layout(
+    yaxis = list(
+      title = "Test MSE",
+      zeroline = F
+    )
+  )
+
+fig1
+```
+
+```{r}
+fig2 <- T1_et %>%
+  plot_ly(
+    y = ~Test.R2,
+    type = 'violin',
+    box = list(
+      visible = T
+    ),
+    meanline = list(
+      visible = T
+    ),
+    color = I("#9F0D7F"),
+    x0 = 'Extra Trees Regreesion'
+  ) 
+
+fig2 <- fig2 %>%
+  layout(
+    yaxis = list(
+      title = "Test R2",
+      zeroline = F
+    )
+  )
+
+fig2
+```
+
+```{r}
+fig3 <- T1_et %>%
+  plot_ly(
+    y = ~Test.RMSE,
+    type = 'violin',
+    box = list(
+      visible = T
+    ),
+    meanline = list(
+      visible = T
+    ),
+    color = I("#EA1179"),
+    x0 = 'Extra Trees Regreesion'
+  ) 
+
+fig3 <- fig3 %>%
+  layout(
+    yaxis = list(
+      title = "Test RMSE",
+      zeroline = F
+    )
+  )
+
+fig3
+```
+
+```{r}
+fig4 <- T1_et %>%
+  plot_ly(
+    y = ~Test.MAPE,
+    type = 'violin',
+    box = list(
+      visible = T
+    ),
+    meanline = list(
+      visible = T
+    ),
+    color = I("#F79BD3"),
+    x0 = 'Extra Trees Regreesion'
+  ) 
+
+fig4 <- fig4 %>%
+  layout(
+    yaxis = list(
+      title = "Test MAPE",
+      zeroline = F
+    )
+  )
+
+fig4
+```
+
+```{r}
+#creating subplot
+fig <- subplot(fig1, fig2, fig3, fig4, nrows = 2, titleY = TRUE, titleX = TRUE, margin = 0.1 )
+fig <- fig %>%layout(title = 'Extra Trees Regreesion 1000 runs')
+
+# Update title
+annotations = list( 
+  list( 
+    x = 0.2,  
+    y = 0.98,  
+    text = "MSE",  
+    xref = "paper",  
+    yref = "paper",  
+    xanchor = "center",  
+    yanchor = "bottom",  
+    showarrow = FALSE 
+  ),  
+  list( 
+    x = 0.8,  
+    y = 0.98,  
+    text = "R2",  
+    xref = "paper",  
+    yref = "paper",  
+    xanchor = "center",  
+    yanchor = "bottom",  
+    showarrow = FALSE 
+  ),  
+  list( 
+    x = 0.2,  
+    y = 0.4,  
+    text = "RMSE",  
+    xref = "paper",  
+    yref = "paper",  
+    xanchor = "center",  
+    yanchor = "bottom",  
+    showarrow = FALSE 
+  ),
+  list( 
+    x = 0.8,  
+    y = 0.4,  
+    text = "MAPE",  
+    xref = "paper",  
+    yref = "paper",  
+    xanchor = "center",  
+    yanchor = "bottom",  
+    showarrow = FALSE 
+  ))
+
+fig <- fig %>%layout(annotations = annotations) 
+fig
+```
+

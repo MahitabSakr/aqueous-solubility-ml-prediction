@@ -1,0 +1,108 @@
+---
+title: "Solubility Prediction Step 1"
+author: "Mahitab Sakr"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Importing libraries: 
+
+```{r}
+library(tidyverse)
+library(kableExtra)
+```
+
+Reading the data file;
+```{r}
+data <- read.csv("curated-solubility-dataset-5.csv", 
+                        sep = ",", header = TRUE)
+```
+Seeing the data file:
+```{r}
+head(data) %>%
+  kbl(caption = "Raw data table") %>%
+  kable_paper() %>%
+  scroll_box(width = "100%", height = "500px")
+```
+Seeing the structure of the columns in the data file:
+```{r}
+str(data)
+```
+Assigning the columns to be removed into a vector called ID_info:
+```{r}
+ID_info <- c("ID","Name", "InChI", "InChIKey", "SMILES", "SD", "Ocurrences")
+```
+Assigning the columns of the data file to a new file without the ID_info:
+```{r}
+df = data[,!(names(data) %in% ID_info)]
+```
+Seeing the new data file:
+```{r}
+head(df) %>%
+  kbl(caption = "Updated data table") %>%
+  kable_paper() %>%
+  scroll_box(width = "100%", height = "300px")
+```
+Seeing the structure of the columns in the new data file:
+```{r}
+str(df, vec.len=2)
+```
+Adding a new column called Group_num:
+```{r}
+df$Group_num <- NA
+```
+Assigning the values based on the numbers in the column "Group".
+```{r}
+df$Group_num[df$Group == "G1"] = 1
+df$Group_num[df$Group == "G2"] = 2
+df$Group_num[df$Group == "G3"] = 3
+df$Group_num[df$Group == "G4"] = 4
+df$Group_num[df$Group == "G5"] = 5
+```
+Looking at the resulted column values:
+```{r}
+table(df$Group_num)
+```
+Removing the old Group column from the data file:
+```{r}
+df = subset(df, select = -c(Group))
+```
+Loop to create a histogram for each column in the data file: (To check for normal distribution)
+```{r}
+for (column in names(df)) {
+    hist(df[[column]],main = column, xlab = column, col = "#560178")
+}
+```
+Creating a new column called Lipinski:
+```{r}
+df$Lipinski <- NA
+```
+Assigning the values based on the Lipinski rule of 5.
+```{r}
+df$Lipinski[df$MolWt < 500 & df$MolLogP < 5 & df$NumHAcceptors < 10 & df$NumHDonors < 5] = 0
+df$Lipinski[df$MolWt < 500 & df$MolLogP > 5 & df$NumHAcceptors < 10 & df$NumHDonors < 5] = 1
+df$Lipinski[df$MolWt < 500 & df$MolLogP < 5 & df$NumHAcceptors > 10 & df$NumHDonors < 5] = 1
+df$Lipinski[df$MolWt < 500 & df$MolLogP < 5 & df$NumHAcceptors < 10 & df$NumHDonors > 5] = 1
+df$Lipinski[df$MolWt > 500 & df$MolLogP < 5 & df$NumHAcceptors < 10 & df$NumHDonors < 5] = 1
+df$Lipinski[df$MolWt > 500 & df$MolLogP > 5 & df$NumHAcceptors < 10 & df$NumHDonors < 5] = 2
+df$Lipinski[df$MolWt > 500 & df$MolLogP < 5 & df$NumHAcceptors > 10 & df$NumHDonors < 5] = 2
+df$Lipinski[df$MolWt > 500 & df$MolLogP < 5 & df$NumHAcceptors < 10 & df$NumHDonors > 5] = 2
+df$Lipinski[df$MolWt < 500 & df$MolLogP > 5 & df$NumHAcceptors > 10 & df$NumHDonors < 5] = 2
+df$Lipinski[df$MolWt < 500 & df$MolLogP > 5 & df$NumHAcceptors < 10 & df$NumHDonors > 5] = 2
+df$Lipinski[df$MolWt < 500 & df$MolLogP < 5 & df$NumHAcceptors > 10 & df$NumHDonors > 5] = 2
+df$Lipinski[df$MolWt > 500 & df$MolLogP > 5 & df$NumHAcceptors > 10 & df$NumHDonors < 5] = 3
+df$Lipinski[df$MolWt > 500 & df$MolLogP < 5 & df$NumHAcceptors > 10 & df$NumHDonors > 5] = 3
+df$Lipinski[df$MolWt < 500 & df$MolLogP > 5 & df$NumHAcceptors > 10 & df$NumHDonors > 5] = 3
+df$Lipinski[df$MolWt > 500 & df$MolLogP > 5 & df$NumHAcceptors > 10 & df$NumHDonors > 5] = 4
+```
+Looking at the resulted column values:
+```{r}
+table(df$Lipinski)
+```
+Writting it to take this version of the data file to python 
+```{r}
+write.csv(df, "df.csv")
+```
