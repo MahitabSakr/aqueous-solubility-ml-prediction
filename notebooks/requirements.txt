@@ -1,0 +1,13 @@
+pandas
+numpy
+scipy
+scikit-learn
+matplotlib
+seaborn
+xgboost
+lightgbm
+mlxtend
+yellowbrick
+
+# optional (used for validation / model comparison in report)
+pycaret
