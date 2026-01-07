@@ -137,97 +137,97 @@ plots
 
     [[1]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-1.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-1.png)
 
 
     [[2]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-2.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-2.png)
 
 
     [[3]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-3.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-3.png)
 
 
     [[4]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-4.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-4.png)
 
 
     [[5]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-5.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-5.png)
 
 
     [[6]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-6.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-6.png)
 
 
     [[7]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-7.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-7.png)
 
 
     [[8]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-8.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-8.png)
 
 
     [[9]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-9.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-9.png)
 
 
     [[10]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-10.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-10.png)
 
 
     [[11]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-11.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-11.png)
 
 
     [[12]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-12.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-12.png)
 
 
     [[13]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-13.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-13.png)
 
 
     [[14]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-14.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-14.png)
 
 
     [[15]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-15.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-15.png)
 
 
     [[16]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-16.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-16.png)
 
 
     [[17]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-17.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-17.png)
 
 
     [[18]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-18.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-18.png)
 
 
     [[19]]
 
-![](Solubility_ML_Step_1_files/figure-commonmark/unnamed-chunk-11-19.png)
+![](Solubility_ML_Step_1_files/figure-commonmark/Histograms-19.png)
 
 Creating a new column called Lipinski:
 

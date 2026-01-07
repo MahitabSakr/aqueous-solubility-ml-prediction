@@ -1,0 +1,89 @@
+---
+title: "Solubility Prediction Step 2"
+author: "Mahitab Sakr"
+format:
+  gfm:
+    echo: true
+prefer-html: true
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+Importing libraries: 
+
+```{r}
+library(tidyverse)
+library(kableExtra)
+```
+
+Reading the data file;
+```{r}
+df <- read.csv("../data/df.csv", sep = ",", header = TRUE)
+```
+Making the correlation values:
+```{r}
+S_mW = round(cor(df$Solubility, df$MolWt, use = "complete.obs"), digits = 3)
+S_mLP = round(cor(df$Solubility, df$MolLogP, use = "complete.obs"), digits = 3) 
+S_HBA = round(cor(df$Solubility, df$NumHAcceptors, use = "complete.obs"), digits = 3) 
+S_HBD = round(cor(df$Solubility, df$NumHDonors, use = "complete.obs"), digits = 3) 
+```
+Basic scatter plot of solubility and Lipinski specific descriptors:
+```{r}
+scatter_MW <- {scatter_plot_1 <- ggplot(df) +
+  geom_point(shape = 8,color = "#241468", mapping = aes(y = Solubility, 
+                                     x = MolWt)) +
+  labs(title = "Solubility and Molecular weight") + xlab('Molecular weight') +
+  annotate("text", x = 1000, y = 1, label = paste("Corr:", S_mW, '***'))      
+ggExtra::ggMarginal(
+  scatter_plot_1,                    
+  type = "histogram",               
+  fill = "#241468")               
+}
+scatter_MW
+```
+```{r}
+scatter_Ml <- {scatter_plot_3 <- ggplot(df) +
+  geom_point(shape = 8,color = "#9F0D7F", mapping = aes(y = Solubility, 
+                                                      x = MolLogP)) +
+  labs(title = "Solubility and MolLogP") +
+  annotate("text", x = 7, y = 2, label = paste("Corr:", S_mLP, '***'))
+ggExtra::ggMarginal(
+  scatter_plot_3,                     
+  type = "histogram",               
+  fill = "#9F0D7F")              
+}
+scatter_Ml
+```
+```{r}
+scatter_HBA <- {scatter_plot_3 <- ggplot(df) +
+  geom_point(shape = 8,color = "#EA1179", mapping = aes(y = Solubility, 
+                                                     x = NumHAcceptors)) +
+  labs(title = "Solubility and HBA") + xlab('HBA') +
+  annotate("text", x = 30, y = 1, label = paste("Corr:", S_HBA, '***'))
+ggExtra::ggMarginal(
+  scatter_plot_3,                     
+  type = "histogram",               
+  fill = "#EA1179")               
+}
+scatter_HBA
+```
+```{r}
+scatter_HBD <- {scatter_plot_3 <- ggplot(df) +
+  geom_point(shape = 8,color = "#F79BD3", mapping = aes(y = Solubility, 
+                                                      x = NumHDonors)) +
+  labs(title = "Solubility and HBD") +  xlab('HBD') +
+  annotate("text", x = 20, y = 1, label = paste("Corr:", S_HBD, '***'))
+ggExtra::ggMarginal(
+  scatter_plot_3,                     
+  type = "histogram",               
+  fill = "#F79BD3")               
+}
+scatter_HBD
+```
+```{r}
+plot_grob <- gridExtra::arrangeGrob(grobs = list(scatter_MW, scatter_Ml, 
+                                                 scatter_HBA, scatter_HBD))
+gridExtra::grid.arrange(plot_grob, 
+                        top = paste("Correlation plots of Lipinski parameters"))
+```
